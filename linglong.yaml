@@ -1,0 +1,27 @@
+package:
+  id: qt3d
+  name: qt3d
+  kind: lib
+  version: 5.11.3
+  description: |
+    qt3d
+
+base:
+  id: org.deepin.base
+  version: 20.5.0
+
+depends:
+- id: qtbase
+  version: 5.11.3.15
+
+source:
+  kind: git
+  url: https://github.com/deepin-community/qt3d-opensource-src.git
+  version: uos/5.11.3
+  commit: 124d3db9cdf0ebad564526d08778d53fc433a900
+  patch:
+  - tst_qtext2dentity_gles_disable.diff
+  - riscv64_atomic.diff
+  - add-sunway-support.patch
+build:
+  kind: qmake

@@ -1,0 +1,3 @@
+tst_qtext2dentity_gles_disable.diff
+riscv64_atomic.diff
+add-sunway-support.patch

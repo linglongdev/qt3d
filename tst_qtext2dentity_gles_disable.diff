@@ -1,0 +1,18 @@
+Description: disable qtext2dentity test on all OpenGL ES 2 environments
+ It fails on Debian armel/armhf too, because of this error:
+ QEGLPlatformContext: eglMakeCurrent failed: 3009
+Author: Dmitry Shachnev <mitya57@debian.org>
+Forwarded: no
+Last-Update: 2020-10-30
+
+--- a/tests/auto/extras/qtext2dentity/tst_qtext2dentity.cpp
++++ b/tests/auto/extras/qtext2dentity/tst_qtext2dentity.cpp
+@@ -77,7 +77,7 @@ private slots:
+ 
+ void tst_qtext2dentity::checkChangeArbiter()
+ {
+-#if !defined(QT_OPENGL_ES_2_ANGLE)
++#if !defined(QT_OPENGL_ES_2)
+     // GIVEN
+     Qt3DExtras::Quick::Qt3DQuickWindow view;
+     view.setSource(QUrl("qrc:/qtext2dentity.qml"));

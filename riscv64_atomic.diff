@@ -1,0 +1,16 @@
+Description: link the openglrenderer plugin with -latomic on riscv64
+ Otherwise it fails to build with the following error:
+ /usr/bin/ld: .obj/renderview.o: in function `QHash<int, Qt3DRender::Render::OpenGL::RenderView::StandardUniform>::findNode(int const&, unsigned int) const':
+ /usr/include/riscv64-linux-gnu/qt5/QtCore/qhash.h:931: undefined reference to `__atomic_exchange_1'
+Author: Dmitry Shachnev <mitya57@debian.org>
+Forwarded: no
+Last-Update: 2020-10-30
+
+--- a/src/plugins/renderers/opengl/opengl.pri
++++ b/src/plugins/renderers/opengl/opengl.pri
+@@ -39,3 +39,5 @@ qtConfig(qt3d-simd-sse2):!qtConfig(qt3d-
+     CONFIG += simd
+     QMAKE_CXXFLAGS += $$QMAKE_CFLAGS_SSE2
+ }
++
++isEqual(QT_ARCH, "riscv64"): QMAKE_LIBS += -latomic
